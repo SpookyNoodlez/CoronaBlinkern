@@ -1,20 +1,8 @@
 #include <stdio.h>
-#include <time.h>
 #include <stdbool.h>
 
-//structs
-struct Date
-{
-    int day;
-    int month;
-    int year;
-} date;
+#include "date.h"
 
-struct DataPack
-{
-    struct Date contactDate;
-    int idCode;
-} dataPack;
 
 //prototypes
 int menu();
@@ -179,6 +167,7 @@ struct DataPack contact()
     }
 }
 
+//for when passing infected
 void alarm()
 {
     printf("VARNING\nKONTAKTA LÄKARE\n");
