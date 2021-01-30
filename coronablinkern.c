@@ -30,6 +30,7 @@ int main()
     }
 }
 
+//main menu
 int menu()
 {
     int menuChoice;
@@ -67,6 +68,7 @@ int menu()
     }
 }
 
+//for when sick
 int open()
 {
     int code;
@@ -79,6 +81,7 @@ int open()
     return code;
 }
 
+//for when passing anyone
 struct DataPack contact()
 {
     struct DataPack pack;
