@@ -74,28 +74,20 @@ int open()
 //for when passing anyone
 void contact(node* headptr)
 {
-    //addCode(headptr);
+    int code;
+    date date;
 
-
-
-
-
-
-
-
-
-    /*
     bool bad = true;
 
     printf("Code:\n");
-    while (scanf("%d", &entry.idCode) != 1)
+    while (scanf("%d", &code) != 1)
     {
         printf("Bad input!\n");
         fflush(stdin);
     }
 
     printf("År:\n");
-    while (scanf("%d", &entry.contactDate.year) != 1)
+    while (scanf("%d", &date.year) != 1)
     {
         printf("Bad input!\n");
         fflush(stdin);
@@ -105,8 +97,8 @@ void contact(node* headptr)
     {
         bad = false;
         printf("Månad:\n");
-        scanf("%d", &entry.contactDate.month);
-        if (entry.contactDate.month > 12 || entry.contactDate.month < 1)
+        scanf("%d", &date.month);
+        if (date.month > 12 || date.month < 1)
         {
             bad = true;
             printf("Bad input!\n");
@@ -120,15 +112,15 @@ void contact(node* headptr)
     {
         bad = false;
         printf("Dag:\n");
-        scanf("%d", &entry.contactDate.day);
+        scanf("%d", &date.day);
 
-        if (entry.contactDate.day < 1)
+        if (date.day < 1)
         {
             bad = true;
         }
         else
         {
-            switch (entry.contactDate.month)
+            switch (date.month)
             {
             case 1:
             case 3:
@@ -137,7 +129,7 @@ void contact(node* headptr)
             case 8:
             case 10:
             case 12:
-                if (entry.contactDate.day > 31)
+                if (date.day > 31)
                 {
                     bad = true;
                 }
@@ -146,22 +138,22 @@ void contact(node* headptr)
             case 6:
             case 9:
             case 11:
-                if (entry.contactDate.day > 30)
+                if (date.day > 30)
                 {
                     bad = true;
                 }
                 break;
             case 2:
-                if (entry.contactDate.year % 4 == 0)
+                if (date.year % 4 == 0)
                 { //skottår;
-                    if (entry.contactDate.day > 29)
+                    if (date.day > 29)
                     {
                         bad = true;
                     }
                 }
                 else
                 {
-                    if (entry.contactDate.day > 28)
+                    if (date.day > 28)
                     {
                         bad = true;
                     }
@@ -176,7 +168,9 @@ void contact(node* headptr)
             printf("Bad input!\n");
             fflush(stdin);
         }
-    }*/
+    }
+
+    addNodeToList(makeNode(code, date), headptr);
 }
 
 //for when passing infected

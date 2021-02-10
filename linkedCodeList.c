@@ -12,3 +12,8 @@ node* makeNode(int code, date date){
     result->next = NULL;
     return result;
 }
+
+void addNodeToList(node* temp, node* head){
+    temp->next = head;
+    head = temp;
+}

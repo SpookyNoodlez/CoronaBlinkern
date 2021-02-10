@@ -14,6 +14,10 @@ typedef struct node{
  * */
 node* makeNode(int code, date date);
 
+
+void addNodeToList(node* temp, node* head);
+
+
 /**
  * Function removes entries in a list older than 21 days
  * */
