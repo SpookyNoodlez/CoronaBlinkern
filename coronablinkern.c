@@ -37,7 +37,7 @@ int menu()
     switch (menuChoice)
     {
     case 1:
-        openCode = open();
+        openCode = open(&head);
         break;
     case 2:
         contact(&head);
@@ -58,20 +58,24 @@ int menu()
     }
 }
 
-//for when sick
-int open()
+//For when sick
+int open(node* head)
 {
-    int code;
+    int openCode;
     printf("Code received:");
-    while (scanf("%d", &code) != 1)
+    while (scanf("%d", &openCode) != 1)
     {
         printf("Bad input!\n");
         fflush(stdin);
     }
-    return code;
+
+    clearOldEntries(head);
+    printList(head);
+
+    return openCode;
 }
 
-//for when passing anyone
+//For when passing anyone
 void contact(node* headptr)
 {
     int code;
@@ -170,7 +174,7 @@ void contact(node* headptr)
     addNodeToList(makeNode(code, date), headptr);
 }
 
-//for when passing infected
+//For when passing infected
 void alarm()
 {
     printf("VARNING\nKONTAKTA LÄKARE\n");
