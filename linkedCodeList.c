@@ -1,9 +1,7 @@
 #include "linkedCodeList.h"
 
 #include <stddef.h>
-
-
-
+#include <stdio.h>
 
 node* makeNode(int code, date date){
     node* result = malloc(sizeof(node));
@@ -18,11 +16,41 @@ void addNodeToList(node* temp, node* head){
     head = temp;
 }
 
+/*
+void removeNode(node* temp){
+
+}*/
+
 void printList(node* head){
     node* temp = head;
 
     while(temp != NULL){
+        printf("Informing people with the following codes:\n");
         printf("%d\n", temp->code);
         temp = temp->next;
+    }
+}
+
+
+void clearOldEntries(node* head){
+    node* current = head;
+    node* previous;
+
+    while(current != NULL){
+        if (isExpired(current->date)){
+            node* temp;
+            if(current == head){ //if removing the first node
+                temp = head;
+                head = head->next;
+            }
+            else{
+                temp = current;
+                previous->next = current->next;
+            }
+            free(temp);
+        }
+
+        previous = current;
+        current = current->next;
     }
 }

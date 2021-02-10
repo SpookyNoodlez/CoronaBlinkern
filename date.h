@@ -1,4 +1,5 @@
-//structs
+#include <stdbool.h>
+
 typedef struct Date
 {
     int day;
@@ -6,28 +7,9 @@ typedef struct Date
     int year;
 } date;
 
+
 /**
- * Function makes sure a date is valid
- * @returns true if valid
+ * Function returns true if the date given is older than 21 days
+ * @param date the dateto be checked
  * */
-bool validate();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-struct DataPack
-{
-    struct Date contactDate;
-    int idCode;
-} dataPack;*/
+bool isExpired(date date);
