@@ -14,7 +14,11 @@ typedef struct node{
  * */
 node* makeNode(int code, date date);
 
-
+/**
+ * Function should probably be combined with makeNode but it adds a node to a list
+ * @param temp The new node to add
+ * @param head Current head of the list
+ * */
 void addNodeToList(node* temp, node* head);
 
 
@@ -24,6 +28,7 @@ void addNodeToList(node* temp, node* head);
 void clearOldEntries();
 
 /**
- * Function displays all saved entries to stdout
+ * Function displays the codes of all saved nodes to stdout
+ * @param head Current head of the list
  * */
-void printEntries();
+void printList(node* head);
