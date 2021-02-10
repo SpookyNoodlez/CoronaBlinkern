@@ -144,8 +144,7 @@ void contact(node* headptr)
                 }
                 break;
             case 2:
-                if (date.year % 4 == 0)
-                { //skottår;
+                if (date.year % 4 == 0){//leap year
                     if (date.day > 29)
                     {
                         bad = true;
@@ -153,12 +152,10 @@ void contact(node* headptr)
                 }
                 else
                 {
-                    if (date.day > 28)
-                    {
+                    if (date.day > 28){
                         bad = true;
                     }
                 }
-            default:
                 break;
             }
         }
