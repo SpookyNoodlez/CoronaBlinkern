@@ -2,17 +2,18 @@
 #include <stdbool.h>
 
 #include "date.h"
-#include "linkerdCodeList.h"
+#include "linkedCodeList.h"
 
 
 //prototypes
 int menu();
 int open();
-struct DataPack contact();
+void contact();
 void alarm();
 
 int main()
 {
+    
     while (true)
     {
         menu();
@@ -22,8 +23,8 @@ int main()
 //main menu
 int menu()
 {
+    node head;
     int menuChoice;
-    struct DataPack data;
     int openCode;
 
     printf("\nCORONA BLINKERN\n");
@@ -39,7 +40,7 @@ int menu()
         openCode = open();
         break;
     case 2:
-        data = contact();
+        contact(&head);
         break;
     case 3:
         alarm();
@@ -71,20 +72,30 @@ int open()
 }
 
 //for when passing anyone
-struct DataPack contact()
+void contact(node* headptr)
 {
-    struct DataPack pack;
+    //addCode(headptr);
+
+
+
+
+
+
+
+
+
+    /*
     bool bad = true;
 
     printf("Code:\n");
-    while (scanf("%d", &pack.idCode) != 1)
+    while (scanf("%d", &entry.idCode) != 1)
     {
         printf("Bad input!\n");
         fflush(stdin);
     }
 
     printf("År:\n");
-    while (scanf("%d", &pack.contactDate.year) != 1)
+    while (scanf("%d", &entry.contactDate.year) != 1)
     {
         printf("Bad input!\n");
         fflush(stdin);
@@ -94,8 +105,8 @@ struct DataPack contact()
     {
         bad = false;
         printf("Månad:\n");
-        scanf("%d", &pack.contactDate.month);
-        if (pack.contactDate.month > 12 || pack.contactDate.month < 1)
+        scanf("%d", &entry.contactDate.month);
+        if (entry.contactDate.month > 12 || entry.contactDate.month < 1)
         {
             bad = true;
             printf("Bad input!\n");
@@ -109,15 +120,15 @@ struct DataPack contact()
     {
         bad = false;
         printf("Dag:\n");
-        scanf("%d", &pack.contactDate.day);
+        scanf("%d", &entry.contactDate.day);
 
-        if (pack.contactDate.day < 1)
+        if (entry.contactDate.day < 1)
         {
             bad = true;
         }
         else
         {
-            switch (pack.contactDate.month)
+            switch (entry.contactDate.month)
             {
             case 1:
             case 3:
@@ -126,7 +137,7 @@ struct DataPack contact()
             case 8:
             case 10:
             case 12:
-                if (pack.contactDate.day > 31)
+                if (entry.contactDate.day > 31)
                 {
                     bad = true;
                 }
@@ -135,22 +146,22 @@ struct DataPack contact()
             case 6:
             case 9:
             case 11:
-                if (pack.contactDate.day > 30)
+                if (entry.contactDate.day > 30)
                 {
                     bad = true;
                 }
                 break;
             case 2:
-                if (pack.contactDate.year % 4 == 0)
+                if (entry.contactDate.year % 4 == 0)
                 { //skottår;
-                    if (pack.contactDate.day > 29)
+                    if (entry.contactDate.day > 29)
                     {
                         bad = true;
                     }
                 }
                 else
                 {
-                    if (pack.contactDate.day > 28)
+                    if (entry.contactDate.day > 28)
                     {
                         bad = true;
                     }
@@ -165,7 +176,7 @@ struct DataPack contact()
             printf("Bad input!\n");
             fflush(stdin);
         }
-    }
+    }*/
 }
 
 //for when passing infected

@@ -4,13 +4,15 @@ typedef struct node{
     int code;
     date date;
     struct node* next;
-}node_t;
+}node;
 
 /**
- * Function adds a code to the list
+ * Function adds a code to the end of the list
  * @param code The new code to add
+ * @param date The date it was recorded on
+ * @returns a pointer to the new head of the list
  * */
-void clearOldEntries(int code);
+node* makeNode(int code, date date);
 
 /**
  * Function removes entries in a list older than 21 days
