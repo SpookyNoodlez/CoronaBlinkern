@@ -1,3 +1,6 @@
+#ifndef LINKEDCODELIST_H
+#define LINKEDCODELIST_H
+
 #include "date.h"
 
 typedef struct node{
@@ -33,3 +36,5 @@ void clearOldEntries(node* head);
  * @param head Current head of the list
  * */
 void printList(node* head);
+
+#endif

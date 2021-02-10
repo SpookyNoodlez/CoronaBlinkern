@@ -53,8 +53,8 @@ date goBack(int days, date date){
 
 bool isExpired(date date){
     //Until I figure out time.h
-    struct Date currentDate = {11,2,2021};
-    struct Date expirationDate = goBack(21, currentDate); 
+    struct date currentDate = {11,2,2021};
+    struct date expirationDate = goBack(21, currentDate); 
     if(date.year<expirationDate.year){
         return true;
     }

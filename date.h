@@ -1,12 +1,14 @@
+#ifndef DATE_H
+#define DATE_H
+
+
 #include <stdbool.h>
 
-typedef struct Date
-{
+typedef struct date{
     int day;
     int month;
     int year;
-} date;
-
+}date;
 
 /**
  * Function returns true if the date given is older than 21 days
@@ -22,3 +24,5 @@ bool isExpired(date date);
  * @returns The new date
  * */
 date goBack(int days, date date);
+
+#endif

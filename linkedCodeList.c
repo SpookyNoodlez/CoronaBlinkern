@@ -2,6 +2,7 @@
 
 #include <stddef.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 node* makeNode(int code, date date){
     node* result = malloc(sizeof(node));
