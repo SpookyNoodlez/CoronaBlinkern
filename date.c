@@ -1,9 +1,9 @@
 #include "date.h"
-
+#include "unittest.h"
 //#include <dos.h> 
 
-
-date goBack(int days, date date){
+date goBack(date date){
+    const int days = 21;
     int dayCount = date.day - days;
     if(dayCount > 0){
         date.day = dayCount;
@@ -51,10 +51,12 @@ date goBack(int days, date date){
 
 
 
+
+
 bool isExpired(date date){
     //Until I figure out time.h
-    struct date currentDate = {11,2,2021};
-    struct date expirationDate = goBack(21, currentDate); 
+    struct date currentDate = {11,2,2021}; //funkar inte med alias?????
+    struct date expirationDate = goBack(currentDate); 
     if(date.year<expirationDate.year){
         return true;
     }

@@ -6,14 +6,13 @@
 
 
 //prototypes
-int menu();
+void menu();
 int open();
 void contact();
 void alarm();
 
 int main()
 {
-    
     while (true)
     {
         menu();
@@ -21,7 +20,7 @@ int main()
 }
 
 //main menu
-int menu()
+void menu()
 {
     node head;
     int menuChoice;
@@ -63,8 +62,7 @@ int open(node* head)
 {
     int openCode;
     printf("Code received:");
-    while (scanf("%d", &openCode) != 1)
-    {
+    while (scanf("%d", &openCode) != 1){
         printf("Bad input!\n");
         fflush(stdin);
     }
@@ -84,15 +82,13 @@ void contact(node* headptr)
     bool bad = true;
 
     printf("Code:\n");
-    while (scanf("%d", &code) != 1)
-    {
+    while (scanf("%d", &code) != 1){
         printf("Bad input!\n");
         fflush(stdin);
     }
 
     printf("År:\n");
-    while (scanf("%d", &date.year) != 1)
-    {
+    while (scanf("%d", &date.year) != 1){
         printf("Bad input!\n");
         fflush(stdin);
     }
@@ -102,8 +98,7 @@ void contact(node* headptr)
         bad = false;
         printf("Månad:\n");
         scanf("%d", &date.month);
-        if (date.month > 12 || date.month < 1)
-        {
+        if (date.month > 12 || date.month < 1){
             bad = true;
             printf("Bad input!\n");
             fflush(stdin);
@@ -112,8 +107,7 @@ void contact(node* headptr)
 
     bad = true;
 
-    while (bad)
-    {
+    while (bad){
         bad = false;
         printf("Dag:\n");
         scanf("%d", &date.day);
@@ -164,8 +158,7 @@ void contact(node* headptr)
             }
         }
 
-        if (bad)
-        {
+        if (bad){
             printf("Bad input!\n");
             fflush(stdin);
         }

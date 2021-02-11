@@ -18,11 +18,10 @@ bool isExpired(date date);
 
 
 /**
- * Function returns a date a certain amount of days in the past
- * @param days Amount of days to go back
+ * Function returns a date a 21 days in the past
  * @param date The date to go back from
  * @returns The new date
  * */
-date goBack(int days, date date);
+date goBack(date date);
 
 #endif

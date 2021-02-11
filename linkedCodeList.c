@@ -1,5 +1,5 @@
 #include "linkedCodeList.h"
-
+#include "unittest.h"
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -35,12 +35,12 @@ void printList(node* head){
 
 void clearOldEntries(node* head){
     node* current = head;
-    node* previous;
+    node* previous = NULL;
 
     while(current != NULL){
         if (isExpired(current->date)){
             node* temp;
-            if(current == head){ //if removing the first node
+            if(previous == NULL){ //if removing the first node
                 temp = head;
                 head = head->next;
             }
