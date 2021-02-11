@@ -26,4 +26,23 @@ int main(){
     
     TEST_CASE("Adding to list")
     VERIFY(good, "Checking that the node after the head holds the code 9876")
+
+    good = false;
+
+    
+    TEST_CASE("Printing list")
+    printList(node2);
+
+
+
+
+    clearOldEntries(node2);
+    if(node2 == NULL){
+        good = true;
+    }
+    TEST_CASE("Clearing head older than 21 days")
+    VERIFY(good, "Checking node2 is NULL")
+
+
+
 }
