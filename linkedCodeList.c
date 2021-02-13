@@ -28,18 +28,23 @@ node* makeNode(int code, date date, node* head){
 void printList(node* head){
     node* temp = head;
 
-    while(temp != NULL){
+    if(head != NULL){
+        while(temp != NULL){
         printf("Informing people with the following codes:\n");
         printf("%d\n", temp->code);
         temp = temp->next;
+        }
+    }
+    else{
+        printf("You haven't passed anyone recently\n");
     }
 }
 
-node* compareNodes(node* n1, node* n2){
-    if(n1->code == n1->code &&
-        n1->date.day == n2->code &&
-        n1->date.month == n2->code &&
-        n1->date.year == n2->code){
+bool compareNodes(node* n1, node* n2){
+    if(n1->code == n2->code &&
+        n1->date.day == n2->date.day &&
+        n1->date.month == n2->date.month &&
+        n1->date.year == n2->date.year){
         return true;
     }
     return false;
@@ -73,14 +78,10 @@ node *deleteNode(node* toDelete, node *head){
 
 void clearOldEntries(node* head){
     node* current = head;
-    node* previous = NULL;
-
     while(current != NULL){
         if (isExpired(current->date)){
-            //deleteNode
+            deleteNode(current, head);
         }
-
-        previous = current;
         current = current->next;
     }
 }

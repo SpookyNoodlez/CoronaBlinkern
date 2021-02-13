@@ -8,7 +8,7 @@
 //prototypes
 void menu();
 int open();
-void contact();
+node* contact();
 void alarm();
 
 int main()
@@ -61,11 +61,12 @@ void menu()
 int open(node* head)
 {
     int openCode;
-    printf("Code received:");
+    printf("Enter code:");
     while (scanf("%d", &openCode) != 1){
         printf("Bad input!\n");
         fflush(stdin);
     }
+    printf("Code %d received",openCode);
 
     clearOldEntries(head);
     printList(head);
@@ -165,6 +166,7 @@ node* contact(node* head)
     }
 
     head = makeNode(code, date, head);
+    return head;
 }
 
 //For when passing infected
