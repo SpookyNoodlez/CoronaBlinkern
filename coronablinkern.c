@@ -22,7 +22,7 @@ int main()
 //main menu
 void menu()
 {
-    node head;
+    node* head = NULL;
     int menuChoice;
     int openCode;
 
@@ -74,7 +74,7 @@ int open(node* head)
 }
 
 //For when passing anyone
-void contact(node* headptr)
+void contact(node* head)
 {
     int code;
     date date;
@@ -164,7 +164,7 @@ void contact(node* headptr)
         }
     }
 
-    addNodeToList(makeNode(code, date), headptr);
+    head = makeNode(code, date, head);
 }
 
 //For when passing infected

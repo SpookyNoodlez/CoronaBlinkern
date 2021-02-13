@@ -13,17 +13,10 @@ typedef struct node{
  * Function adds a code to the end of the list
  * @param code The new code to add
  * @param date The date it was recorded on
+ * @param head Current head of the list
  * @returns a pointer to the new head of the list
  * */
-node* makeNode(int code, date date);
-
-/**
- * Function should probably be combined with makeNode but it adds a node to a list
- * @param temp The new node to add
- * @param head Current head of the list
- * */
-void addNodeToList(node* temp, node* head);
-
+node* makeNode(int code, date date, node* head);
 
 /**
  * Function removes entries in a list older than 21 days
