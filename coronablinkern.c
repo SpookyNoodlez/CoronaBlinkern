@@ -7,7 +7,7 @@
 
 //prototypes
 void menu();
-int open();
+node* open();
 node* contact();
 void alarm();
 
@@ -24,19 +24,18 @@ void menu()
 {
     node* head = NULL;
     int menuChoice;
-    int openCode;
 
     printf("\nCORONA BLINKERN\n");
-    printf("1. Ange öppningskod\n");
-    printf("2. Ta emot kod\n");
-    printf("3. Smittalarm\n");
+    printf("1. I have an initialisation code\n");
+    printf("2. Receive bluetooth code\n");
+    printf("3. Infection alarm\n");
     scanf("%d", &menuChoice);
 
     bool bad = false;
     switch (menuChoice)
     {
     case 1:
-        openCode = open(&head);
+        head = open(&head);
         break;
     case 2:
         head = contact(&head);
@@ -58,7 +57,7 @@ void menu()
 }
 
 //For when sick
-int open(node* head)
+node* open(node* head)
 {
     int openCode;
     printf("Enter code:");
@@ -68,10 +67,10 @@ int open(node* head)
     }
     printf("Code %d received",openCode);
 
-    clearOldEntries(head);
+    head = clearOldEntries(head);
     printList(head);
 
-    return openCode;
+    return head;
 }
 
 //For when passing anyone
@@ -88,7 +87,7 @@ node* contact(node* head)
         fflush(stdin);
     }
 
-    printf("År:\n");
+    printf("Year:\n");
     while (scanf("%d", &date.year) != 1){
         printf("Bad input!\n");
         fflush(stdin);
@@ -97,7 +96,7 @@ node* contact(node* head)
     while (bad)
     {
         bad = false;
-        printf("Månad:\n");
+        printf("Month:\n");
         scanf("%d", &date.month);
         if (date.month > 12 || date.month < 1){
             bad = true;
@@ -110,7 +109,7 @@ node* contact(node* head)
 
     while (bad){
         bad = false;
-        printf("Dag:\n");
+        printf("Day:\n");
         scanf("%d", &date.day);
 
         if (date.day < 1)

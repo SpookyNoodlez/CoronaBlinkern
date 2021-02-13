@@ -76,12 +76,13 @@ node *deleteNode(node* toDelete, node *head){
     return head;
 }
 
-void clearOldEntries(node* head){
+node* clearOldEntries(node* head){
     node* current = head;
     while(current != NULL){
         if (isExpired(current->date)){
-            deleteNode(current, head);
+            head = deleteNode(current, head);
         }
         current = current->next;
     }
+    return head;
 }

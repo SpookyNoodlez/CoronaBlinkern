@@ -22,7 +22,7 @@ node* makeNode(int code, date date, node* head);
  * Function removes entries in a list older than 21 days
  * @param head Current head of the list
  * */
-void clearOldEntries(node* head);
+node* clearOldEntries(node* head);
 
 /**
  * Function displays the codes of all saved nodes to stdout
