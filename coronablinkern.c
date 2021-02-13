@@ -39,7 +39,7 @@ void menu()
         openCode = open(&head);
         break;
     case 2:
-        contact(&head);
+        head = contact(&head);
         break;
     case 3:
         alarm();
@@ -74,7 +74,7 @@ int open(node* head)
 }
 
 //For when passing anyone
-void contact(node* head)
+node* contact(node* head)
 {
     int code;
     date date;

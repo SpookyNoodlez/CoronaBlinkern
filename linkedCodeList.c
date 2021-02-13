@@ -35,6 +35,41 @@ void printList(node* head){
     }
 }
 
+node* compareNodes(node* n1, node* n2){
+    if(n1->code == n1->code &&
+        n1->date.day == n2->code &&
+        n1->date.month == n2->code &&
+        n1->date.year == n2->code){
+        return true;
+    }
+    return false;
+}
+
+node *deleteNode(node* toDelete, node *head){
+    node* current = head->next;
+    node* previous = head;
+
+    if (compareNodes(toDelete, head))
+    { //if removing the first node
+        head = current;
+        free(previous);
+    }
+    else{
+        while(!compareNodes(current, toDelete)){
+            previous = current;
+            current = current->next;
+        }
+        if(current->next == NULL){
+            previous->next = NULL;
+        }
+        else{
+            previous->next = current->next;
+        }
+        free(current);
+    }
+
+    return head;
+}
 
 void clearOldEntries(node* head){
     node* current = head;
@@ -42,16 +77,7 @@ void clearOldEntries(node* head){
 
     while(current != NULL){
         if (isExpired(current->date)){
-            node* temp;
-            if(previous == NULL){ //if removing the first node
-                temp = head;
-                head = head->next;
-            }
-            else{
-                temp = current;
-                previous->next = current->next;
-            }
-            free(temp);
+            //deleteNode
         }
 
         previous = current;
