@@ -52,18 +52,18 @@ date goBack(date date){
 
 
 
-
-bool isExpired(date date){
+//Här är felet tror jag
+bool isExpired(date checkDate){
     //Until I figure out time.h
-    struct date currentDate = {11,2,2021}; //funkar inte med alias?????
-    struct date expirationDate = goBack(currentDate); 
-    if(date.year<expirationDate.year){
+    date currentDate = {11,2,2021};
+    date expirationDate = goBack(currentDate);
+    if(checkDate.year < expirationDate.year){
         return true;
     }
-    else if(date.month<expirationDate.month){
+    else if(checkDate.month < expirationDate.month){
         return true;
     }
-    else if(date.day<expirationDate.day){
+    else if(checkDate.day < expirationDate.day){
         return true;
     }
     return false;
