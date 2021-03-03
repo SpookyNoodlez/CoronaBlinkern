@@ -34,19 +34,18 @@ void menu()
     bool bad = false;
     switch (menuChoice)
     {
-    case 1:
-        head = open(&head);
-        break;
-    case 2:
-        head = contact(&head);
-        break;
-    case 3:
-        alarm();
-        break;
-
-    default:
-        bad = true;
-        break;
+        case 1:
+            head = open(&head);
+            break;
+        case 2:
+            head = contact(&head);
+            break;
+        case 3:
+            alarm();
+            break;
+        default:
+            bad = true;
+            break;
     }
 
     if (bad)
@@ -158,7 +157,19 @@ node* contact(node* head)
             }
         }
 
-        if (bad){
+        if(!bad){
+            //open file for appending
+            FILE* fp = fopen("data.txt", "a");
+            //add data to file
+            int result = fprintf(fp, "%d|%d.%d.%d\n", code, date.day, date.month, -date.year);
+            if(result < 4){
+                printf("failed");
+            }
+            //close file
+            fclose(fp);
+            fclose(fp);
+        }
+        else{
             printf("Bad input!\n");
             fflush(stdin);
         }

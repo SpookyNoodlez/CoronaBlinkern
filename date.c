@@ -45,7 +45,6 @@ date goBack(date date){
             }
             break;
     }
-
     return date;
 }
 
