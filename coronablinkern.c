@@ -56,6 +56,9 @@ void menu()
 //For when sick
 void open()
 {
+
+    //Krashar här av någon anledning
+    /*
     int openCode;
     printf("Enter code:");
     while (scanf("%d", &openCode) != 1){
@@ -63,12 +66,25 @@ void open()
         fflush(stdin);
     }
     printf("Code %d received",openCode);
-
+*/
     //TODO
     //delete old entries from file
-    //print all remaineing entries
+    //print all remaining entries
 
 
+    int code, day, month, year;
+    int i = 1;
+    FILE* fp = fopen("data.txt", "r");
+    while(!feof(fp)){
+        fscanf(fp, "%d|%d.%d.%d ",&code, &day, &month, &year);
+        printf("Entry %d:\n",i);
+        printf("Code: %d\n",code);
+        printf("Date: %d.%d.%d\n\n",day, month, year);
+
+        i++;
+    }
+
+    fclose(fp);
 }
 
 //For when passing anyone
