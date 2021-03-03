@@ -167,7 +167,6 @@ node* contact(node* head)
             }
             //close file
             fclose(fp);
-            fclose(fp);
         }
         else{
             printf("Bad input!\n");

@@ -1,3 +1,5 @@
+#include <time.h>
+
 #include "date.h"
 #include "unittest.h"
 //#include <dos.h> 
@@ -53,8 +55,19 @@ date goBack(date date){
 
 //Här är felet tror jag
 bool isExpired(date checkDate){
-    //Until I figure out time.h
-    date currentDate = {11,2,2021};
+    time_t s, val = 1;
+    struct tm* current_time;
+    
+    s = time(NULL);
+    
+    current_time = localtime(&s);
+
+    date currentDate;
+    currentDate.day = current_time->tm_mday;
+    currentDate.month = current_time->tm_mon + 1;
+    currentDate.year = current_time->tm_year + 1900;
+
+
     date expirationDate = goBack(currentDate);
     if(checkDate.year < expirationDate.year){
         return true;
