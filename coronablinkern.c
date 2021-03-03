@@ -2,13 +2,12 @@
 #include <stdbool.h>
 
 #include "date.h"
-#include "linkedCodeList.h"
 
 
 //prototypes
 void menu();
-node* open();
-node* contact();
+void open();
+void contact();
 void alarm();
 
 int main()
@@ -22,7 +21,6 @@ int main()
 //main menu
 void menu()
 {
-    node* head = NULL;
     int menuChoice;
 
     printf("\nCORONA BLINKERN\n");
@@ -35,10 +33,10 @@ void menu()
     switch (menuChoice)
     {
         case 1:
-            head = open(&head);
+            open();
             break;
         case 2:
-            head = contact(&head);
+            contact();
             break;
         case 3:
             alarm();
@@ -56,7 +54,7 @@ void menu()
 }
 
 //For when sick
-node* open(node* head)
+void open()
 {
     int openCode;
     printf("Enter code:");
@@ -66,14 +64,15 @@ node* open(node* head)
     }
     printf("Code %d received",openCode);
 
-    head = clearOldEntries(head);
-    printList(head);
+    //TODO
+    //delete old entries from file
+    //print all remaineing entries
 
-    return head;
+
 }
 
 //For when passing anyone
-node* contact(node* head)
+void contact()
 {
     int code;
     date date;
@@ -173,9 +172,6 @@ node* contact(node* head)
             fflush(stdin);
         }
     }
-
-    head = makeNode(code, date, head);
-    return head;
 }
 
 //For when passing infected

@@ -55,7 +55,7 @@ date goBack(date date){
 
 //Här är felet tror jag
 bool isExpired(date checkDate){
-    time_t s, val = 1;
+    time_t s;
     struct tm* current_time;
     
     s = time(NULL);
