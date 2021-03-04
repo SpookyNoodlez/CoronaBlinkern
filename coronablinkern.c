@@ -73,7 +73,7 @@ void deleteAtPositions(bool* toDelete){
     }
 
     //copy all contents to the temporary file except the old entries
-    char* str;
+    char str[80];
     int i = 0;
     while (!feof(fptr1))
     {
@@ -126,11 +126,12 @@ void open()
         }
         i++;
     }
-
     deleteAtPositions(toRemove);
+    fclose(fp);
 
 
     //print remaining
+    fp = fopen("data.txt", "r");
     int code, day, month, year;
     i = 1;
     while (!feof(fp))
@@ -242,7 +243,7 @@ void contact()
             //open file for appending
             FILE *fp = fopen("data.txt", "a");
             //add data to file
-            int result = fprintf(fp, "%d|%d.%d.%d\n", code, date.day, date.month, -date.year);
+            int result = fprintf(fp, "%d|%d.%d.%d\n", code, date.day, date.month, date.year);
             if (result < 4)
             {
                 printf("failed");
