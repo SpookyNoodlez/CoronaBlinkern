@@ -64,8 +64,8 @@ void deleteAtPositions(bool* toDelete){
         printf(" File not found or unable to open the input file!!\n");
         return;
     }
-    FILE *fptr2 = fopen("temp", "w"); //open a temporary file in write mode
-    if (!fptr2)
+    FILE *tempFptr = fopen("temp.txt", "w"); //open a temporary file in write mode
+    if (!tempFptr)
     {
         printf("Unable to open a temporary file to write!!\n");
         fclose(fptr1);
@@ -84,15 +84,30 @@ void deleteAtPositions(bool* toDelete){
             //only transfer the recent entries
             if (!toDelete[i])
             {
-                fprintf(fptr2, "%s", str);
+                fprintf(tempFptr, "%s", str);
             }
             i++;
         }
     }
     fclose(fptr1);
-    fclose(fptr2);
-    remove("data");       // remove the original file
-    rename("temp", "data"); // rename the temporary file to original name
+    fclose(tempFptr);
+
+    //Both fail
+    int removeStatus = remove("data.txt");              // remove the original file
+    if(removeStatus == 0){
+        printf("File deleted successfully\n");
+    }
+    else{
+        printf("File NOT deleted\n");
+    }
+    int renameStatus = rename("temp.txt", "data.txt"); // rename the temporary file to original name
+    if(renameStatus == 0){
+        printf("File renamed successfully\n");
+    }
+    else{
+        printf("File NOT renamed\n");
+    }
+    printf("\n");
 }
 
 
@@ -123,8 +138,10 @@ void open()
         }
         i++;
     }
-    deleteAtPositions(toRemove);
     fclose(fp);
+
+    deleteAtPositions(toRemove);
+    
 
 
     //print remaining
