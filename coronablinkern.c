@@ -1,14 +1,17 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include <string.h>
 
 #include "date.h"
 
+#define MAX 256
 
 //prototypes
 void menu();
 void open();
 void contact();
 void alarm();
+void deleteAtPositions(bool* toDelete);
 
 int main()
 {
@@ -32,18 +35,18 @@ void menu()
     bool bad = false;
     switch (menuChoice)
     {
-        case 1:
-            open();
-            break;
-        case 2:
-            contact();
-            break;
-        case 3:
-            alarm();
-            break;
-        default:
-            bad = true;
-            break;
+    case 1:
+        open();
+        break;
+    case 2:
+        contact();
+        break;
+    case 3:
+        alarm();
+        break;
+    default:
+        bad = true;
+        break;
     }
 
     if (bad)
@@ -53,10 +56,49 @@ void menu()
     }
 }
 
+void deleteAtPositions(bool* toDelete){
+    //FOR DELETING THE STUFF
+    FILE *fptr1 = fopen("data.txt", "r");
+    if (!fptr1)
+    {
+        printf(" File not found or unable to open the input file!!\n");
+        return;
+    }
+    FILE *fptr2 = fopen("temp", "w"); //open a temporary file in write mode
+    if (!fptr2)
+    {
+        printf("Unable to open a temporary file to write!!\n");
+        fclose(fptr1);
+        return;
+    }
+
+    //copy all contents to the temporary file except the old entries
+    char* str;
+    int i = 0;
+    while (!feof(fptr1))
+    {
+        strcpy(str, "\0");
+        fgets(str, MAX, fptr1);
+        if (!feof(fptr1))
+        {
+            //only transfer the recent entries
+            if (!toDelete[i])
+            {
+                fprintf(fptr2, "%s", str);
+            }
+            i++;
+        }
+    }
+    fclose(fptr1);
+    fclose(fptr2);
+    remove("data");       // remove the original file
+    rename("temp", "data"); // rename the temporary file to original name
+}
+
+
 //For when sick
 void open()
 {
-
     //Krashar här av någon anledning
     /*
     int openCode;
@@ -66,20 +108,37 @@ void open()
         fflush(stdin);
     }
     printf("Code %d received",openCode);
-*/
+    */
     //TODO
     //delete old entries from file
-    //print all remaining entries
+
+    //Find old entries
+    FILE* fp = fopen("data.txt", "r+");
+    int trashCode;
+    date checkDate;
+    bool toRemove[100];
+    int i = 0;
+    while (!feof(fp)){
+        fscanf(fp, "%d|%d.%d.%d ", &trashCode, &checkDate.day, &checkDate.month, &checkDate.year);
+        bool expired = isExpired(checkDate);
+        if(expired){
+            toRemove[i] = true;
+        }
+        i++;
+    }
+
+    deleteAtPositions(toRemove);
 
 
+    //print remaining
     int code, day, month, year;
-    int i = 1;
-    FILE* fp = fopen("data.txt", "r");
-    while(!feof(fp)){
-        fscanf(fp, "%d|%d.%d.%d ",&code, &day, &month, &year);
-        printf("Entry %d:\n",i);
-        printf("Code: %d\n",code);
-        printf("Date: %d.%d.%d\n\n",day, month, year);
+    i = 1;
+    while (!feof(fp))
+    {
+        fscanf(fp, "%d|%d.%d.%d ", &code, &day, &month, &year);
+        printf("Entry %d:\n", i);
+        printf("Code: %d\n", code);
+        printf("Date: %d.%d.%d\n\n", day, month, year);
 
         i++;
     }
@@ -96,13 +155,15 @@ void contact()
     bool bad = true;
 
     printf("Code:\n");
-    while (scanf("%d", &code) != 1){
+    while (scanf("%d", &code) != 1)
+    {
         printf("Bad input!\n");
         fflush(stdin);
     }
 
     printf("Year:\n");
-    while (scanf("%d", &date.year) != 1){
+    while (scanf("%d", &date.year) != 1)
+    {
         printf("Bad input!\n");
         fflush(stdin);
     }
@@ -112,7 +173,8 @@ void contact()
         bad = false;
         printf("Month:\n");
         scanf("%d", &date.month);
-        if (date.month > 12 || date.month < 1){
+        if (date.month > 12 || date.month < 1)
+        {
             bad = true;
             printf("Bad input!\n");
             fflush(stdin);
@@ -121,7 +183,8 @@ void contact()
 
     bad = true;
 
-    while (bad){
+    while (bad)
+    {
         bad = false;
         printf("Day:\n");
         scanf("%d", &date.day);
@@ -156,7 +219,8 @@ void contact()
                 }
                 break;
             case 2:
-                if (date.year % 4 == 0){//leap year
+                if (date.year % 4 == 0)
+                { //leap year
                     if (date.day > 29)
                     {
                         bad = true;
@@ -164,7 +228,8 @@ void contact()
                 }
                 else
                 {
-                    if (date.day > 28){
+                    if (date.day > 28)
+                    {
                         bad = true;
                     }
                 }
@@ -172,18 +237,21 @@ void contact()
             }
         }
 
-        if(!bad){
+        if (!bad)
+        {
             //open file for appending
-            FILE* fp = fopen("data.txt", "a");
+            FILE *fp = fopen("data.txt", "a");
             //add data to file
             int result = fprintf(fp, "%d|%d.%d.%d\n", code, date.day, date.month, -date.year);
-            if(result < 4){
+            if (result < 4)
+            {
                 printf("failed");
             }
             //close file
             fclose(fp);
         }
-        else{
+        else
+        {
             printf("Bad input!\n");
             fflush(stdin);
         }
