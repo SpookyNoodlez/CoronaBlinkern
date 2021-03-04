@@ -100,19 +100,16 @@ void deleteAtPositions(bool* toDelete){
 void open()
 {
     //Krashar här av någon anledning
-    /*
     int openCode;
     printf("Enter code:");
     while (scanf("%d", &openCode) != 1){
         printf("Bad input!\n");
         fflush(stdin);
     }
-    printf("Code %d received",openCode);
-    */
-    //TODO
-    //delete old entries from file
+    printf("Code %d received\n\n", openCode);
 
-    //Find old entries
+
+    //Delete old entries
     FILE* fp = fopen("data.txt", "r+");
     int trashCode;
     date checkDate;
