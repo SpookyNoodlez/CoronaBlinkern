@@ -67,8 +67,11 @@ bool isExpired(date checkDate){
     currentDate.month = current_time->tm_mon + 1;
     currentDate.year = current_time->tm_year + 1900;
 
-
     date expirationDate = goBack(currentDate);
+
+    printf("Current date: %d.%d.%d\n", currentDate.day, currentDate.month, currentDate.year);
+    printf("Expiration date: %d.%d.%d\n\n", expirationDate.day, expirationDate.month, expirationDate.year);
+
     if(checkDate.year < expirationDate.year){
         return true;
     }

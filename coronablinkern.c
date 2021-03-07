@@ -114,7 +114,6 @@ void deleteAtPositions(bool* toDelete){
 //For when sick
 void open()
 {
-    //Krashar här av någon anledning
     int openCode;
     printf("Enter code:");
     while (scanf("%d", &openCode) != 1){
