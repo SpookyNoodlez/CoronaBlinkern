@@ -12,7 +12,7 @@ void menu();
 void open();
 void contact();
 void alarm();
-void deleteAtPositions(bool* toDelete);
+void deleteAtPositions(bool *toDelete);
 
 int main()
 {
@@ -21,28 +21,27 @@ int main()
     //Ladda in från fil
     //Sortera gamla datum till vänster nya till höger
 
-
-
     //Skapa ett binärt träd med utgångsdatumet som rot
     date currentDate = getCurrentDate();
     date expirationDate = goBack(currentDate);
-    TreeNode* root = createNode(expirationDate, 000000);
+    TreeNode *root = createNode(expirationDate, 000000);
 
     //Ladda in data från filen på rätt sida om trädet
-    FILE* fp = fopen("data.txt", "r");
+    FILE *fp = fopen("data.txt", "r");
     int loadedCode;
     date loadedDate;
     int i = 0;
-    TreeNode* checkNode = root;
+    TreeNode *checkNode = root;
     while (!feof(fp))
     {
         i++;
         fscanf(fp, "%d|%d.%d.%d ", &loadedCode, &loadedDate.day, &loadedDate.month, &loadedDate.year);
-        
 
-        while(checkNode != NULL){
-            if(dateRelation(checkNode->date, loadedDate)){
-                checkNode = checkNode->left; 
+        while (checkNode != NULL)
+        {
+            if (dateRelation(checkNode->date, loadedDate))
+            {
+                checkNode = checkNode->left;
             }
         }
         checkNode = createNode(loadedDate, loadedCode);
@@ -54,50 +53,55 @@ int main()
     printf("%d entries loaded from file\n", i);
     fclose(fp);
 
-
-
-    while (true)
-    {
-        menu();
-    }
+    
+    menu();
 }
 
 //main menu
 void menu()
 {
-    int menuChoice;
-
-    printf("\nCORONA BLINKERN\n");
-    printf("1. I have an initialisation code\n");
-    printf("2. Receive bluetooth code\n");
-    printf("3. Infection alarm\n");
-    scanf("%d", &menuChoice);
-
-    bool bad = false;
-    switch (menuChoice)
+    bool loop = true;
+    while (loop)
     {
-    case 1:
-        open();
-        break;
-    case 2:
-        contact();
-        break;
-    case 3:
-        alarm();
-        break;
-    default:
-        bad = true;
-        break;
-    }
+        int menuChoice;
 
-    if (bad)
-    {
-        printf("Bad input!\n");
-        fflush(stdin);
+        printf("\nCORONA BLINKERN\n");
+        printf("1. I have an initialisation code\n");
+        printf("2. Receive bluetooth code\n");
+        printf("3. Infection alarm\n");
+        printf("4. Quit\n");
+        scanf("%d", &menuChoice);
+
+        bool bad = false;
+        switch (menuChoice)
+        {
+        case 1:
+            open();
+            break;
+        case 2:
+            contact();
+            break;
+        case 3:
+            alarm();
+            break;
+        case 4:
+            loop = false;
+            break;
+        default:
+            bad = true;
+            break;
+        }
+
+        if (bad)
+        {
+            printf("Bad input!\n");
+            fflush(stdin);
+        }
     }
 }
 
-void deleteAtPositions(bool* toDelete){
+void deleteAtPositions(bool *toDelete)
+{
     //FOR DELETING THE STUFF
     FILE *fptr1 = fopen("data.txt", "r");
     if (!fptr1)
@@ -134,46 +138,51 @@ void deleteAtPositions(bool* toDelete){
     fclose(tempFptr);
 
     //Both fail
-    int removeStatus = remove("data.txt");              // remove the original file
-    if(removeStatus == 0){
+    int removeStatus = remove("data.txt"); // remove the original file
+    if (removeStatus == 0)
+    {
         printf("File deleted successfully\n");
     }
-    else{
+    else
+    {
         printf("File NOT deleted\n");
     }
     int renameStatus = rename("temp.txt", "data.txt"); // rename the temporary file to original name
-    if(renameStatus == 0){
+    if (renameStatus == 0)
+    {
         printf("File renamed successfully\n");
     }
-    else{
+    else
+    {
         printf("File NOT renamed\n");
     }
     printf("\n");
 }
-
 
 //For when sick
 void open()
 {
     int openCode;
     printf("Enter code:");
-    while (scanf("%d", &openCode) != 1){
+    while (scanf("%d", &openCode) != 1)
+    {
         printf("Bad input!\n");
         fflush(stdin);
     }
     printf("Code %d received\n\n", openCode);
 
-
     //Delete old entries
-    FILE* fp = fopen("data.txt", "r+");
+    FILE *fp = fopen("data.txt", "r+");
     int trashCode;
     date checkDate;
     bool toRemove[100];
     int i = 0;
-    while (!feof(fp)){
+    while (!feof(fp))
+    {
         fscanf(fp, "%d|%d.%d.%d ", &trashCode, &checkDate.day, &checkDate.month, &checkDate.year);
         bool expired = isExpired(checkDate);
-        if(expired){
+        if (expired)
+        {
             toRemove[i] = true;
         }
         i++;
@@ -181,8 +190,6 @@ void open()
     fclose(fp);
 
     deleteAtPositions(toRemove);
-    
-
 
     //print remaining
     fp = fopen("data.txt", "r");
