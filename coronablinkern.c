@@ -27,33 +27,39 @@ int main()
     TreeNode *root = createNode(expirationDate, 000000);
 
     //Ladda in data från filen på rätt sida om trädet
-    FILE *fp = fopen("data.txt", "r");
+    FILE *fp = fopen("data.txt", "r+");
     int loadedCode;
     date loadedDate;
     int i = 0;
     TreeNode *checkNode = root;
     while (!feof(fp))
     {
-        i++;
         fscanf(fp, "%d|%d.%d.%d ", &loadedCode, &loadedDate.day, &loadedDate.month, &loadedDate.year);
-
-        while (checkNode != NULL)
+        if (!isExpired(loadedDate))
         {
-            if (dateRelation(checkNode->date, loadedDate))
+            i++;
+            while (checkNode != NULL)
             {
-                checkNode = checkNode->left;
+                if (dateRelation(checkNode->date, loadedDate) == -1)
+                {
+                    checkNode = checkNode->left;
+                }
+                else
+                {
+                    checkNode = checkNode->right;
+                }
             }
-        }
-        checkNode = createNode(loadedDate, loadedCode);
+            checkNode = createNode(loadedDate, loadedCode);
 
-        printf("Entry %d:\n", i);
-        printf("Code: %d\n", loadedCode);
-        printf("Date: %d.%d.%d\n\n", loadedDate.day, loadedDate.month, loadedDate.year);
+            printf("Entry %d:\n", i);
+            printf("Code: %d\n", loadedCode);
+            printf("Date: %d.%d.%d\n\n", loadedDate.day, loadedDate.month, loadedDate.year);
+        }
     }
     printf("%d entries loaded from file\n", i);
     fclose(fp);
 
-    
+
     menu();
 }
 
