@@ -74,9 +74,18 @@ int dateRelation(date date1, date date2){
     {
         return 0;
     }
+    //date1 earlier than date2
+    if(date1.year < date2.year){
+        return -1;
+    }
+    else if(date1.month < date2.month){
+        return -1;
+    }
+    else if(date1.day < date2.day){
+        return -1;
+    }
     //date1 later than date2
-
-
+    return 1;
 }
 
 
@@ -92,14 +101,9 @@ bool isExpired(date checkDate){
     printf("Current date: %d.%d.%d\n", currentDate.day, currentDate.month, currentDate.year);
     printf("Expiration date: %d.%d.%d\n\n", expirationDate.day, expirationDate.month, expirationDate.year);
 
-    if(checkDate.year < expirationDate.year){
-        return true;
+    if(dateRelation(checkDate, expirationDate) == -1){
+        return true; 
     }
-    else if(checkDate.month < expirationDate.month){
-        return true;
-    }
-    else if(checkDate.day < expirationDate.day){
-        return true;
-    }
+    
     return false;
 }

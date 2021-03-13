@@ -6,8 +6,8 @@
 typedef struct TreeNode{
     date date;
     int code;
-    TreeNode* left;
-    TreeNode* right;
+    struct TreeNode* left;
+    struct TreeNode* right;
 }TreeNode;
 
 

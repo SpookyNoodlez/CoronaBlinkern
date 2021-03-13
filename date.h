@@ -10,6 +10,15 @@ typedef struct date{
     int year;
 }date;
 
+
+/**
+ * Function checks which date is earlier
+ * @param date1 first date to check
+ * @param date2 second date to check
+ * @returns 0 if dates are the same, 1 if date1 is later, -1 if date1 is earlier
+ * */
+int dateRelation(date date1, date date2);
+
 /**
  * Function returns true if the date given is older than 21 days
  * @param date the date to be checked

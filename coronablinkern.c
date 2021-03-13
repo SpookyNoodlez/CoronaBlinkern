@@ -30,24 +30,26 @@ int main()
 
     //Ladda in data från filen på rätt sida om trädet
     FILE* fp = fopen("data.txt", "r");
-    int code;
+    int loadedCode;
     date loadedDate;
     int i = 0;
+    TreeNode* checkNode = root;
     while (!feof(fp))
     {
         i++;
-        fscanf(fp, "%d|%d.%d.%d ", &code, &loadedDate.day, &loadedDate.month, &loadedDate.year);
-        if(isExpired(loadedDate)){
-            TreeNode* checkNode = root;
-            while(checkNode) //JOBBAR HÄR, GÖR FUNKTIONER FÖR ATT KOLLA OM DATUM ÄR ÄDLRE ELLER  NYARE
-        }
+        fscanf(fp, "%d|%d.%d.%d ", &loadedCode, &loadedDate.day, &loadedDate.month, &loadedDate.year);
+        
 
+        while(checkNode != NULL){
+            if(dateRelation(checkNode->date, loadedDate)){
+                checkNode = checkNode->left; 
+            }
+        }
+        checkNode = createNode(loadedDate, loadedCode);
 
         printf("Entry %d:\n", i);
-        printf("Code: %d\n", code);
+        printf("Code: %d\n", loadedCode);
         printf("Date: %d.%d.%d\n\n", loadedDate.day, loadedDate.month, loadedDate.year);
-
-        
     }
     printf("%d entries loaded from file\n", i);
     fclose(fp);
