@@ -1,11 +1,14 @@
+#ifndef TREE_H
+#define TREE_H
+
 #include "date.h"
 
-typedef struct treeNode{
+typedef struct TreeNode{
     date date;
     int code;
-    treeNode* left;
-    treeNode* right;
-}treeNode;
+    TreeNode* left;
+    TreeNode* right;
+}TreeNode;
 
 
 /**
@@ -14,4 +17,6 @@ typedef struct treeNode{
  * @param code The code to add to the tree
  * @returns A pointer to the created node
  * */
-treeNode* createNode(struct date date, int code);
+TreeNode* createNode(struct date date, int code);
+
+#endif

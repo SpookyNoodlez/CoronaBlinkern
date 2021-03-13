@@ -16,9 +16,14 @@ typedef struct date{
  * */
 bool isExpired(date date);
 
+/**
+ * Function returns today's date
+ * @returns The current date
+ * */
+date getCurrentDate();
 
 /**
- * Function returns a date a 21 days in the past
+ * Function returns a date 21 days earlier that the given date
  * @param date The date to go back from
  * @returns The new date
  * */

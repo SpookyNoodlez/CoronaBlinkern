@@ -3,6 +3,7 @@
 #include <string.h>
 
 #include "date.h"
+#include "tree.h"
 
 #define MAX 256
 
@@ -15,6 +16,44 @@ void deleteAtPositions(bool* toDelete);
 
 int main()
 {
+    //TODO
+    //Skapa ett binärt träd med utgångsdatumet som rot
+    //Ladda in från fil
+    //Sortera gamla datum till vänster nya till höger
+
+
+
+    //Skapa ett binärt träd med utgångsdatumet som rot
+    date currentDate = getCurrentDate();
+    date expirationDate = goBack(currentDate);
+    TreeNode* root = createNode(expirationDate, 000000);
+
+    //Ladda in data från filen på rätt sida om trädet
+    FILE* fp = fopen("data.txt", "r");
+    int code;
+    date loadedDate;
+    int i = 0;
+    while (!feof(fp))
+    {
+        i++;
+        fscanf(fp, "%d|%d.%d.%d ", &code, &loadedDate.day, &loadedDate.month, &loadedDate.year);
+        if(isExpired(loadedDate)){
+            TreeNode* checkNode = root;
+            while(checkNode) //JOBBAR HÄR, GÖR FUNKTIONER FÖR ATT KOLLA OM DATUM ÄR ÄDLRE ELLER  NYARE
+        }
+
+
+        printf("Entry %d:\n", i);
+        printf("Code: %d\n", code);
+        printf("Date: %d.%d.%d\n\n", loadedDate.day, loadedDate.month, loadedDate.year);
+
+        
+    }
+    printf("%d entries loaded from file\n", i);
+    fclose(fp);
+
+
+
     while (true)
     {
         menu();

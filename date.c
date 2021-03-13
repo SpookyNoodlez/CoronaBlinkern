@@ -50,11 +50,7 @@ date goBack(date date){
     return date;
 }
 
-
-
-
-//Här är felet tror jag
-bool isExpired(date checkDate){
+date getCurrentDate(){
     time_t s;
     struct tm* current_time;
     
@@ -66,6 +62,30 @@ bool isExpired(date checkDate){
     currentDate.day = current_time->tm_mday;
     currentDate.month = current_time->tm_mon + 1;
     currentDate.year = current_time->tm_year + 1900;
+
+    return currentDate;
+}
+
+int dateRelation(date date1, date date2){
+    //same date
+    if(date1.day == date2.day && 
+    date1.month == date2.month &&
+    date1.year == date2.year)
+    {
+        return 0;
+    }
+    //date1 later than date2
+
+
+}
+
+
+
+
+
+//Här är felet tror jag
+bool isExpired(date checkDate){
+    date currentDate = getCurrentDate();
 
     date expirationDate = goBack(currentDate);
 
