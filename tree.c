@@ -4,9 +4,11 @@
 #include "tree.h"
 #include "date.h"
 
-TreeNode* createNode(struct date date, int code){
-    TreeNode* result = malloc(sizeof(TreeNode));
-    if(result != NULL){
+TreeNode *createNode(struct date date, int code)
+{
+    TreeNode *result = malloc(sizeof(TreeNode));
+    if (result != NULL)
+    {
         result->left = NULL;
         result->right = NULL;
         result->date = date;
@@ -15,18 +17,21 @@ TreeNode* createNode(struct date date, int code){
     return result;
 }
 
-void addData(TreeNode* checkNode){//JOBBAR HÄR
-    while (checkNode != NULL)
-            {
-                if (dateRelation(checkNode->date, loadedDate) == -1)
-                {
-                    checkNode = checkNode->left;
-                }
-                else
-                {
-                    checkNode = checkNode->right;
-                }
-            }
-            checkNode = createNode(loadedDate, loadedCode);
+TreeNode* insertNode(TreeNode* root, date date, int code)
+{
+    if(root == NULL){ //landed in an empty node
+        root = createNode(date, code);
+    }
+    else if(isEarlier(date, root->date)){
+        root->left = insertNode(root->left, date, code); //recursive funktion call
+    }
+    else{
+        root->right = insertNode(root->right, date, code); //recursive funktion call
+    }
 
+    return root;
+}
+
+void saveToFile()
+{
 }

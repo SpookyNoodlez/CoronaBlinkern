@@ -12,7 +12,6 @@ void menu();
 void open();
 void contact();
 void alarm();
-void deleteAtPositions(bool *toDelete);
 
 int main()
 {
@@ -93,6 +92,7 @@ void menu(TreeNode* root)
             alarm();
             break;
         case 4:
+            saveToFile();
             loop = false;
             break;
         default:

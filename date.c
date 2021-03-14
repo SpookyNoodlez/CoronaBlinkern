@@ -66,26 +66,19 @@ date getCurrentDate(){
     return currentDate;
 }
 
-int dateRelation(date date1, date date2){
-    //same date
-    if(date1.day == date2.day && 
-    date1.month == date2.month &&
-    date1.year == date2.year)
-    {
-        return 0;
-    }
+bool isEarlier(date date1, date date2){
     //date1 earlier than date2
     if(date1.year < date2.year){
-        return -1;
+        return true;
     }
     else if(date1.month < date2.month){
-        return -1;
+        return true;
     }
     else if(date1.day < date2.day){
-        return -1;
+        return true;
     }
-    //date1 later than date2
-    return 1;
+    //date1 is later than date2 or same
+    return false;
 }
 
 
