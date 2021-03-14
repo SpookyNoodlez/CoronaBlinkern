@@ -100,9 +100,9 @@ bool isExpired(date checkDate){
 
     printf("Current date: %d.%d.%d\n", currentDate.day, currentDate.month, currentDate.year);
     printf("Expiration date: %d.%d.%d\n\n", expirationDate.day, expirationDate.month, expirationDate.year);
-
+    
     if(dateRelation(checkDate, expirationDate) == -1){
-        return true; 
+        return true;
     }
     
     return false;

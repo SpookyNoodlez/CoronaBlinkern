@@ -14,3 +14,19 @@ TreeNode* createNode(struct date date, int code){
     }
     return result;
 }
+
+void addData(TreeNode* checkNode){//JOBBAR HÄR
+    while (checkNode != NULL)
+            {
+                if (dateRelation(checkNode->date, loadedDate) == -1)
+                {
+                    checkNode = checkNode->left;
+                }
+                else
+                {
+                    checkNode = checkNode->right;
+                }
+            }
+            checkNode = createNode(loadedDate, loadedCode);
+
+}

@@ -27,7 +27,7 @@ int main()
     TreeNode *root = createNode(expirationDate, 000000);
 
     //Ladda in data från filen på rätt sida om trädet
-    FILE *fp = fopen("data.txt", "r+");
+    FILE *fp = fopen("data.txt", "r");
     int loadedCode;
     date loadedDate;
     int i = 0;
@@ -38,7 +38,7 @@ int main()
         if (!isExpired(loadedDate))
         {
             i++;
-            while (checkNode != NULL)
+            while (checkNode != NULL)//USE addData() here
             {
                 if (dateRelation(checkNode->date, loadedDate) == -1)
                 {
@@ -57,14 +57,16 @@ int main()
         }
     }
     printf("%d entries loaded from file\n", i);
+
     fclose(fp);
+    fp = fopen("data.txt", "w");
 
 
-    menu();
+    menu(root);
 }
 
 //main menu
-void menu()
+void menu(TreeNode* root)
 {
     bool loop = true;
     while (loop)
@@ -85,7 +87,7 @@ void menu()
             open();
             break;
         case 2:
-            contact();
+            contact(root);
             break;
         case 3:
             alarm();
@@ -104,65 +106,6 @@ void menu()
             fflush(stdin);
         }
     }
-}
-
-void deleteAtPositions(bool *toDelete)
-{
-    //FOR DELETING THE STUFF
-    FILE *fptr1 = fopen("data.txt", "r");
-    if (!fptr1)
-    {
-        printf(" File not found or unable to open the input file!!\n");
-        return;
-    }
-    FILE *tempFptr = fopen("temp.txt", "w"); //open a temporary file in write mode
-    if (!tempFptr)
-    {
-        printf("Unable to open a temporary file to write!!\n");
-        fclose(fptr1);
-        return;
-    }
-
-    //copy all contents to the temporary file except the old entries
-    char str[80];
-    int i = 0;
-    while (!feof(fptr1))
-    {
-        strcpy(str, "\0");
-        fgets(str, MAX, fptr1);
-        if (!feof(fptr1))
-        {
-            //only transfer the recent entries
-            if (!toDelete[i])
-            {
-                fprintf(tempFptr, "%s", str);
-            }
-            i++;
-        }
-    }
-    fclose(fptr1);
-    fclose(tempFptr);
-
-    //Both fail
-    int removeStatus = remove("data.txt"); // remove the original file
-    if (removeStatus == 0)
-    {
-        printf("File deleted successfully\n");
-    }
-    else
-    {
-        printf("File NOT deleted\n");
-    }
-    int renameStatus = rename("temp.txt", "data.txt"); // rename the temporary file to original name
-    if (renameStatus == 0)
-    {
-        printf("File renamed successfully\n");
-    }
-    else
-    {
-        printf("File NOT renamed\n");
-    }
-    printf("\n");
 }
 
 //For when sick
@@ -195,7 +138,7 @@ void open()
     }
     fclose(fp);
 
-    deleteAtPositions(toRemove);
+    //deleteAtPositions(toRemove);
 
     //print remaining
     fp = fopen("data.txt", "r");
@@ -215,7 +158,7 @@ void open()
 }
 
 //For when passing anyone
-void contact()
+void contact(TreeNode* root)
 {
     int code;
     date date;
@@ -305,18 +248,21 @@ void contact()
             }
         }
 
-        if (!bad)
+        if (!bad)//ÄNDRA HÄR
         {
-            //open file for appending
-            FILE *fp = fopen("data.txt", "a");
-            //add data to file
-            int result = fprintf(fp, "%d|%d.%d.%d\n", code, date.day, date.month, date.year);
-            if (result < 4)
+            TreeNode* checkNode = root;
+            while (checkNode != NULL)//USE addData() here
             {
-                printf("failed");
+                if (dateRelation(checkNode->date, date) == -1)
+                {
+                    checkNode = checkNode->left;
+                }
+                else
+                {
+                    checkNode = checkNode->right;
+                }
             }
-            //close file
-            fclose(fp);
+            checkNode = createNode(date, code);
         }
         else
         {
