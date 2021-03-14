@@ -80,23 +80,3 @@ bool isEarlier(date date1, date date2){
     //date1 is later than date2 or same
     return false;
 }
-
-
-
-
-
-//Här är felet tror jag
-bool isExpired(date checkDate){
-    date currentDate = getCurrentDate();
-
-    date expirationDate = goBack(currentDate);
-
-    printf("Current date: %d.%d.%d\n", currentDate.day, currentDate.month, currentDate.year);
-    printf("Expiration date: %d.%d.%d\n\n", expirationDate.day, expirationDate.month, expirationDate.year);
-    
-    if(dateRelation(checkDate, expirationDate) == -1){
-        return true;
-    }
-    
-    return false;
-}

@@ -20,12 +20,6 @@ typedef struct date{
 bool isEarlier(date date1, date date2);
 
 /**
- * Function returns true if the date given is older than 21 days
- * @param date the date to be checked
- * */
-bool isExpired(date date);
-
-/**
  * Function returns today's date
  * @returns The current date
  * */

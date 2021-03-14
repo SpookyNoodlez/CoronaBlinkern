@@ -19,4 +19,8 @@ typedef struct TreeNode{
  * */
 TreeNode* createNode(struct date date, int code);
 
+
+//ADD DESCRIPTION
+TreeNode* insertNode(TreeNode* root, date date, int code);
+
 #endif

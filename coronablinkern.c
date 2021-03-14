@@ -19,7 +19,7 @@ int main()
     //Skapa ett binärt träd med utgångsdatumet som rot
     date currentDate = getCurrentDate();
     date expirationDate = goBack(currentDate);
-    TreeNode *root = insertNode(expirationDate, 0);
+    TreeNode *root = insertNode(root, expirationDate, 0);
     //Ladda all existerande data från filen till trädet
     root = loadFile(root);
 
@@ -27,7 +27,7 @@ int main()
 }
 
 //main menu
-void menu(TreeNode *root)
+void menu(TreeNode **rootPtr)
 {
     bool loop = true;
     while (loop)
@@ -48,13 +48,13 @@ void menu(TreeNode *root)
             open();
             break;
         case 2:
-            contact(root);
+            contact(rootPtr);
             break;
         case 3:
             alarm();
             break;
         case 4:
-            saveToFile();
+            //saveToFile();
             loop = false;
             break;
         default:
@@ -82,45 +82,11 @@ void open()
     }
     printf("Code %d received\n\n", openCode);
 
-    //Delete old entries
-    FILE *fp = fopen("data.txt", "r+");
-    int trashCode;
-    date checkDate;
-    bool toRemove[100];
-    int i = 0;
-    while (!feof(fp))
-    {
-        fscanf(fp, "%d|%d.%d.%d ", &trashCode, &checkDate.day, &checkDate.month, &checkDate.year);
-        bool expired = isExpired(checkDate);
-        if (expired)
-        {
-            toRemove[i] = true;
-        }
-        i++;
-    }
-    fclose(fp);
-
-    //deleteAtPositions(toRemove);
-
-    //print remaining
-    fp = fopen("data.txt", "r");
-    int code, day, month, year;
-    i = 1;
-    while (!feof(fp))
-    {
-        fscanf(fp, "%d|%d.%d.%d ", &code, &day, &month, &year);
-        printf("Entry %d:\n", i);
-        printf("Code: %d\n", code);
-        printf("Date: %d.%d.%d\n\n", day, month, year);
-
-        i++;
-    }
-
-    fclose(fp);
+    //JOBBAR HÄR
 }
 
 //For when passing anyone
-void contact(TreeNode *root)
+void contact(TreeNode **rootPtr)
 {
     int code;
     date date;
@@ -210,21 +176,9 @@ void contact(TreeNode *root)
             }
         }
 
-        if (!bad) //ÄNDRA HÄR
+        if (!bad)
         {
-            TreeNode *checkNode = root;
-            while (checkNode != NULL) //USE addData() here
-            {
-                if (dateRelation(checkNode->date, date) == -1)
-                {
-                    checkNode = checkNode->left;
-                }
-                else
-                {
-                    checkNode = checkNode->right;
-                }
-            }
-            checkNode = createNode(date, code);
+            (*rootPtr) = insertNode((*rootPtr), date, code);
         }
         else
         {

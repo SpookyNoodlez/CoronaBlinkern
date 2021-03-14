@@ -3,7 +3,7 @@
 #include "date.h"
 #include "tree.h"
 
-TreeNode* loadFromFile(TreeNode* root){
+TreeNode* loadFile(TreeNode* root){
     date loadedDate;
     int loadedCode;
     FILE *fp = fopen("data.txt", "r");
@@ -14,7 +14,7 @@ TreeNode* loadFromFile(TreeNode* root){
     {
         fscanf(fp, "%d|%d.%d.%d ", &loadedCode, &loadedDate.day, &loadedDate.month, &loadedDate.year);
 
-        root = InsertNode(root, loadedDate, loadedCode);
+        root = insertNode(root, loadedDate, loadedCode);
         i++;
         printf("Entry %d:\n", i);
         printf("Code: %d\n", loadedCode);
