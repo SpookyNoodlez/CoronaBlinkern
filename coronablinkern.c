@@ -4,6 +4,7 @@
 
 #include "date.h"
 #include "tree.h"
+#include "file.h"
 
 #define MAX 256
 
@@ -15,38 +16,12 @@ void alarm();
 
 int main()
 {
-    //TODO
-    //Skapa ett binärt träd med utgångsdatumet som rot
-    //Ladda in från fil
-    //Sortera gamla datum till vänster nya till höger
-
     //Skapa ett binärt träd med utgångsdatumet som rot
     date currentDate = getCurrentDate();
     date expirationDate = goBack(currentDate);
     TreeNode *root = insertNode(expirationDate, 0);
-
-    //Ladda in data från filen på rätt sida om trädet
-    FILE *fp = fopen("data.txt", "r");
-    int loadedCode;
-    date loadedDate;
-    int i = 0;
-    TreeNode *checkNode = root;
-
-    printf("Loading entries form file...\n");
-    while (!feof(fp))
-    {
-        fscanf(fp, "%d|%d.%d.%d ", &loadedCode, &loadedDate.day, &loadedDate.month, &loadedDate.year);
-
-        root = InsertNode(root, loadedDate, loadedCode);
-        i++;
-        printf("Entry %d:\n", i);
-        printf("Code: %d\n", loadedCode);
-        printf("Date: %d.%d.%d\n\n", loadedDate.day, loadedDate.month, loadedDate.year);
-    }
-    printf("%d entries loaded from file\n", i);
-
-    fclose(fp);
-    fp = fopen("data.txt", "w");
+    //Ladda all existerande data från filen till trädet
+    root = loadFile(root);
 
     menu(root);
 }
