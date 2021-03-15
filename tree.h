@@ -4,7 +4,7 @@
 #include "date.h"
 
 typedef struct TreeNode{
-    date date;
+    Date date;
     int code;
     struct TreeNode* left;
     struct TreeNode* right;
@@ -17,10 +17,10 @@ typedef struct TreeNode{
  * @param code The code to add to the tree
  * @returns A pointer to the created node
  * */
-TreeNode* createNode(struct date date, int code);
+TreeNode* createNode(struct Date date, int code);
 
 
 //ADD DESCRIPTION
-TreeNode* insertNode(TreeNode* root, date date, int code);
+TreeNode* insertNode(TreeNode* root, Date date, int code);
 
 #endif

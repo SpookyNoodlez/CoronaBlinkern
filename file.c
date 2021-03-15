@@ -4,7 +4,7 @@
 #include "tree.h"
 
 TreeNode* loadFile(TreeNode* root){
-    date loadedDate;
+    Date loadedDate;
     int loadedCode;
     FILE *fp = fopen("data.txt", "r");
     

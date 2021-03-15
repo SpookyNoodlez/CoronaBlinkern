@@ -2,7 +2,7 @@
 #include "unittest.h"
 
 int main(){
-    date d1 = {1,2,2021};
+    Date d1 = {1,2,2021};
     bool good = false;
     struct node* node1 = makeNode(1234, d1);
     if(node1->code == 1234 &&
@@ -17,7 +17,7 @@ int main(){
 
     good = false;
 
-    date d2 = {23,10,2001};
+    Date d2 = {23,10,2001};
     struct node* node2 = makeNode(9876, d2);
     addNodeToList(node2, node1);
     if (node2->next->code == 9876){

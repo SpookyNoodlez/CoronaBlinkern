@@ -4,21 +4,21 @@
 #include "unittest.h"
 //#include <dos.h> 
 
-date goBack(date date){
+Date goBack(Date Date){
     const int days = 21;
-    int dayCount = date.day - days;
+    int dayCount = Date.day - days;
     if(dayCount > 0){
-        date.day = dayCount;
-        return date;
+        Date.day = dayCount;
+        return Date;
     }
     
-    date.month--;
-    if(date.month == 0){
-        date.year--;
-        date.month = 12;
+    Date.month--;
+    if(Date.month == 0){
+        Date.year--;
+        Date.month = 12;
     }
 
-    switch (date.month)
+    switch (Date.month)
     {
         case 1:
         case 3:
@@ -27,30 +27,30 @@ date goBack(date date){
         case 8:
         case 10:
         case 12:
-            date.day = 31 + dayCount;
+            Date.day = 31 + dayCount;
             break;
         case 4:
         case 6:
         case 9:
         case 11:
-            date.day = 30 + dayCount;
+            Date.day = 30 + dayCount;
             break;
         case 2:
             //leap year
-            if (date.year % 4 == 0)
+            if (Date.year % 4 == 0)
             {
-                date.day = 29 + dayCount;
+                Date.day = 29 + dayCount;
             }
             else
             {
-                date.day = 28 + dayCount;
+                Date.day = 28 + dayCount;
             }
             break;
     }
-    return date;
+    return Date;
 }
 
-date getCurrentDate(){
+Date getCurrentDate(){
     time_t s;
     struct tm* current_time;
     
@@ -58,7 +58,7 @@ date getCurrentDate(){
     
     current_time = localtime(&s);
 
-    date currentDate;
+    Date currentDate;
     currentDate.day = current_time->tm_mday;
     currentDate.month = current_time->tm_mon + 1;
     currentDate.year = current_time->tm_year + 1900;
@@ -66,7 +66,7 @@ date getCurrentDate(){
     return currentDate;
 }
 
-bool isEarlier(date date1, date date2){
+bool isEarlier(Date date1, Date date2){
     //date1 earlier than date2
     if(date1.year < date2.year){
         return true;

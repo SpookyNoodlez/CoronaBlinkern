@@ -4,11 +4,11 @@
 
 #include <stdbool.h>
 
-typedef struct date{
+typedef struct Date{
     int day;
     int month;
     int year;
-}date;
+}Date;
 
 
 /**
@@ -17,19 +17,19 @@ typedef struct date{
  * @param date2 second date to check
  * @returns true if date1 is earlier and false otherwise
  * */
-bool isEarlier(date date1, date date2);
+bool isEarlier(Date date1, Date date2);
 
 /**
  * Function returns today's date
  * @returns The current date
  * */
-date getCurrentDate();
+Date getCurrentDate();
 
 /**
  * Function returns a date 21 days earlier that the given date
  * @param date The date to go back from
  * @returns The new date
  * */
-date goBack(date date);
+Date goBack(Date date);
 
 #endif

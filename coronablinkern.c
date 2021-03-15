@@ -17,8 +17,8 @@ void alarm();
 int main()
 {
     //Skapa ett binärt träd med utgångsdatumet som rot
-    date currentDate = getCurrentDate();
-    date expirationDate = goBack(currentDate);
+    Date currentDate = getCurrentDate();
+    Date expirationDate = goBack(currentDate);
     TreeNode *root = insertNode(root, expirationDate, 0);
     //Ladda all existerande data från filen till trädet
     root = loadFile(root);
@@ -89,7 +89,7 @@ void open()
 void contact(TreeNode **rootPtr)
 {
     int code;
-    date date;
+    Date date;
 
     bool bad = true;
 

@@ -5,7 +5,7 @@
 
 typedef struct node{
     int code;
-    date date;
+    Date date;
     struct node* next;
 }node;
 
@@ -16,7 +16,7 @@ typedef struct node{
  * @param head Current head of the list
  * @returns a pointer to the new head of the list
  * */
-node* makeNode(int code, date date, node* head);
+node* makeNode(int code, Date date, node* head);
 
 /**
  * Function removes entries in a list older than 21 days

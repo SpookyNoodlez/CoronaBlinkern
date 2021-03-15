@@ -4,7 +4,7 @@
 #include "tree.h"
 #include "date.h"
 
-TreeNode *createNode(struct date date, int code)
+TreeNode *createNode(struct Date date, int code)
 {
     TreeNode *result = malloc(sizeof(TreeNode));
     if (result != NULL)
@@ -17,7 +17,7 @@ TreeNode *createNode(struct date date, int code)
     return result;
 }
 
-TreeNode* insertNode(TreeNode* root, date date, int code)
+TreeNode* insertNode(TreeNode* root, Date date, int code)
 {
     if(root == NULL){ //landed in an empty node
         root = createNode(date, code);

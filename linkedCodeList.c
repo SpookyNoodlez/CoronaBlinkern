@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-node* makeNode(int code, date date, node* head){
+node* makeNode(int code, Date date, node* head){
     node* temp = (node*)malloc(sizeof(node));
     temp->code = code;
     temp->date = date;

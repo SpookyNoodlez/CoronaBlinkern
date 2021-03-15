@@ -3,8 +3,8 @@
 int main(){
     bool good = false;
 
-    date d3 = {31,1,2021};
-    date d4 = goBack(d3);
+    Date d3 = {31,1,2021};
+    Date d4 = goBack(d3);
     if(d4.day == 10){
         good = true;
     }
@@ -14,8 +14,8 @@ int main(){
     good = false;
 
 
-    date d5 = {10,2,2021};
-    date d6 = goBack(d5);
+    Date d5 = {10,2,2021};
+    Date d6 = goBack(d5);
     if(d6.day == 20 && d6.month == 1){
         good = true;
     }
@@ -25,8 +25,8 @@ int main(){
     good = false;
 
 
-    date d7 = {10,1,2021};
-    date d8 = goBack(d7);
+    Date d7 = {10,1,2021};
+    Date d8 = goBack(d7);
     if(d8.day == 20 && d8.month == 12 && d8.year == 2020){
         good = true;
     }
@@ -36,8 +36,8 @@ int main(){
     good = false;
 
 
-    date d9 = {10,3,2024};
-    date d10 = goBack(d9);
+    Date d9 = {10,3,2024};
+    Date d10 = goBack(d9);
     if(d10.day == 18 && d10.month == 2){
         good = true;
     }
@@ -46,8 +46,8 @@ int main(){
     VERIFY(good, "Checking that day is 18 and month is 2")
     good = false;
 
-    date d11 = {10,3,2024};
-    date d12 = goBack(d11);
+    Date d11 = {10,3,2024};
+    Date d12 = goBack(d11);
     if(d12.day == 18 && d12.month == 2){
         good = true;
     }
@@ -58,8 +58,8 @@ int main(){
 
     //goBack works
 
-    date d1 = {1,1,2021};
-    date d2 = {1,2,2021};
+    Date d1 = {1,1,2021};
+    Date d2 = {1,2,2021};
 
     TEST_CASE("Expired date")
     VERIFY(isExpired(d1), "Checking that 1.1.2021 is expired")
