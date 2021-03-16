@@ -10,15 +10,16 @@ TreeNode* loadFile(TreeNode* root){
     
     int i = 0;
     printf("Loading entries from file...\n");
-    while (!feof(fp))
+    while (!feof(fp)) //skräpdata om tom fil?
     {
-        fscanf(fp, "%d|%d.%d.%d ", &loadedCode, &loadedDate.day, &loadedDate.month, &loadedDate.year);
-
-        root = insertNode(root, loadedDate, loadedCode);
-        i++;
-        printf("Entry %d:\n", i);
-        printf("Code: %d\n", loadedCode);
-        printf("Date: %d.%d.%d\n\n", loadedDate.day, loadedDate.month, loadedDate.year);
+        int control = fscanf(fp, "%d|%d.%d.%d ", &loadedCode, &loadedDate.day, &loadedDate.month, &loadedDate.year);
+        if(control == 4){
+            root = insertNode(root, loadedDate, loadedCode);
+            i++;
+            printf("Entry %d:\n", i);
+            printf("Code: %d\n", loadedCode);
+            printf("Date: %d.%d.%d\n\n", loadedDate.day, loadedDate.month, loadedDate.year);
+        }
     }
     printf("%d entries loaded from file\n", i);
 

@@ -32,6 +32,6 @@ TreeNode* insertNode(TreeNode* root, Date date, int code)
     return root;
 }
 
-void saveToFile()
-{
+TreeNode* deleteOld(TreeNode* root){
+    
 }
