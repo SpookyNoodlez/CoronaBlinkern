@@ -19,40 +19,46 @@ void quit(TreeNode** rootPtr);
 
 int main(int argc, char *argv[])
 {
-    printf("argc = %d", argc);
     if(argc > 1){//command line mode
         if(strcmp(argv[1], "add")){//add entry
-            int code = argv[2];
+            int code = atoi(argv[2]);
             Date date;
             char* dateString = argv[3];
-            int control = sscanf(dateString, "%d|%d.%d.%d",code,date.day,date.month,date.year);
+            int control = sscanf(dateString, "%d|%d.%d.%d",&code,&date.day,&date.month,&date.year);
             if (control != 4){//needs more datacheck
                 exit(1);
             }
             FILE* fp = fopen("data.txt", "a");
-            fprintf("%d|%d.%d.%d",code,date.day,date.month,date.year);
+            fprintf(fp,"%d|%d.%d.%d",code,date.day,date.month,date.year);
             fclose(fp);
             exit(0);
         }
-        if(strcmp(argv[1], "sick")){
-            printf("code %d received\n", argv[2]);
+        else if(strcmp(argv[1], "sick")){
+            printf("code %s received\n", argv[2]);
+            exit(0);
         }
-        if(strcmp(argv[1], "check")){
+        else if(strcmp(argv[1], "check")){
             int code;
             Date date;
-            fscanf("%d|%d.%d.%d",code,date.day,date.month,date.year);
-            if(code == argv[2]){
+            FILE* fp = fopen("data.txt", "r");
+            fscanf(fp,"%d|%d.%d.%d",&code,&date.day,&date.month,&date.year);
+            if(code == atoi(argv[2])){
                 printf("Code is in file\n");
             }
             else{
                 printf("Code is not in file\n");
             }
+            exit(0);
         }
-        if(strcmp(argv[1], "help")){
+        else if(strcmp(argv[1], "help")){
             printf("COMMANDS\n");
             printf("add code|year.month.day - Adds an entry to the file\n");
             printf("sick opencode - Nothing really\n");
             printf("check code - Checks if the code is in the file\n");
+            exit(0);
+        }
+        else{
+            printf("Invalid command\n");
         }
     }
 
