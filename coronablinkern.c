@@ -11,53 +11,64 @@
 #define MAX 256
 
 //prototypes
-void menu(TreeNode** rootPtr);
-void open(TreeNode** rootPtr);
-void contact(TreeNode** rootPtr);
+void menu(TreeNode **rootPtr);
+void open(TreeNode **rootPtr);
+void contact(TreeNode **rootPtr);
 void alarm();
-void quit(TreeNode** rootPtr);
+void quit(TreeNode **rootPtr);
 
 int main(int argc, char *argv[])
 {
-    if(argc > 1){//command line mode
-        if(strcmp(argv[1], "add")){//add entry
+    printf("%s", argv[1]);
+    if (argc > 1)
+    { //command line mode
+        if (strcmp(argv[1], "add"))
+        { //add entry
             int code = atoi(argv[2]);
             Date date;
-            char* dateString = argv[3];
-            int control = sscanf(dateString, "%d|%d.%d.%d",&code,&date.day,&date.month,&date.year);
-            if (control != 4){//needs more datacheck
+            char *dateString = argv[3];
+            int control = sscanf(dateString, "%d|%d.%d.%d", &code, &date.day, &date.month, &date.year);
+            if (control != 4)
+            { //needs more datacheck
                 exit(1);
             }
-            FILE* fp = fopen("data.txt", "a");
-            fprintf(fp,"%d|%d.%d.%d",code,date.day,date.month,date.year);
+            FILE *fp = fopen("data.txt", "a");
+            fprintf(fp, "%d|%d.%d.%d", code, date.day, date.month, date.year);
             fclose(fp);
             exit(0);
         }
-        else if(strcmp(argv[1], "sick")){
+        else if (strcmp(argv[1], "sick"))
+        {
             printf("code %s received\n", argv[2]);
             exit(0);
         }
-        else if(strcmp(argv[1], "check")){
+        else if (strcmp(argv[1], "check"))
+        {
             int code;
             Date date;
-            FILE* fp = fopen("data.txt", "r");
-            fscanf(fp,"%d|%d.%d.%d",&code,&date.day,&date.month,&date.year);
-            if(code == atoi(argv[2])){
+            FILE *fp = fopen("data.txt", "r");
+            fscanf(fp, "%d|%d.%d.%d", &code, &date.day, &date.month, &date.year);
+            if (code == atoi(argv[2]))
+            {
                 printf("Code is in file\n");
             }
-            else{
+            else
+            {
                 printf("Code is not in file\n");
             }
+            fclose(fp);
             exit(0);
         }
-        else if(strcmp(argv[1], "help")){
+        else if (strcmp(argv[1], "help"))
+        {
             printf("COMMANDS\n");
             printf("add code|year.month.day - Adds an entry to the file\n");
             printf("sick opencode - Nothing really\n");
             printf("check code - Checks if the code is in the file\n");
             exit(0);
         }
-        else{
+        else
+        {
             printf("Invalid command\n");
         }
     }
@@ -70,7 +81,7 @@ int main(int argc, char *argv[])
     //Ladda all existerande data från filen till trädet
     root = loadFile(root);
 
-    menu(&root);//hmmmmm
+    menu(&root); //hmmmmm
 }
 
 //main menu
@@ -91,16 +102,16 @@ void menu(TreeNode **rootPtr)
         switch (menuChoice)
         {
         case 1:
-            open(rootPtr);//hmmmmm
+            open(rootPtr); //hmmmmm
             break;
         case 2:
-            contact(rootPtr);//hmmmmm
+            contact(rootPtr); //hmmmmm
             break;
         case 3:
             alarm();
             break;
         case 4:
-            quit(rootPtr);//hmmmmm
+            quit(rootPtr); //hmmmmm
             break;
         default:
             bad = true;
@@ -116,7 +127,7 @@ void menu(TreeNode **rootPtr)
 }
 
 //For when sick
-void open(TreeNode** rootPtr)
+void open(TreeNode **rootPtr)
 {
     int openCode;
     printf("Enter code:");
@@ -240,8 +251,9 @@ void alarm()
 }
 
 //Save and quit
-void quit(TreeNode** rootPtr){
-    FILE* fp = fopen("data.txt","w");
+void quit(TreeNode **rootPtr)
+{
+    FILE *fp = fopen("data.txt", "w");
     saveToFile((*rootPtr)->right, fp);
     fclose(fp);
     exit(0);

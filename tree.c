@@ -17,23 +17,28 @@ TreeNode *createNode(struct Date date, int code)
     return result;
 }
 
-TreeNode* insertNode(TreeNode* root, Date date, int code)
+TreeNode *insertNode(TreeNode *root, Date date, int code)
 {
-    if(root == NULL){ //landed in an empty node
+    if (root == NULL)
+    { //landed in an empty node
         root = createNode(date, code);
     }
-    else if(isEarlier(date, root->date)){
+    else if (isEarlier(date, root->date))
+    {
         root->left = insertNode(root->left, date, code); //recursive funktion call
     }
-    else{
+    else
+    {
         root->right = insertNode(root->right, date, code); //recursive funktion call
     }
 
     return root;
 }
 
-void deleteBranch(TreeNode* p){
-    if(p == NULL){
+void deleteBranch(TreeNode *p)
+{
+    if (p == NULL)
+    {
         return;
     }
     deleteBranch(p->left);
