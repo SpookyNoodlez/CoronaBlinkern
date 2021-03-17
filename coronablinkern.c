@@ -2,6 +2,7 @@
 #include <stdbool.h>
 #include <string.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "date.h"
 #include "tree.h"
@@ -18,8 +19,24 @@ void quit(TreeNode** rootPtr);
 
 int main(int argc, char *argv[])
 {
-    if(argc != 0){//command line mode
+    printf("argc = %d", argc);
+    if(argc > 1){//command line mode
+        if(strcmp(argv[1], "add")){//add entry
+            int code = argv[2];
+            Date date;
+            char* dateString = argv[3];
+            int control = sscanf(dateString, "%d|%d.%d.%d",code,date.day,date.month,date.year);
+            if (control != 4){//needs more datacheck
+                exit(1);
+            }
+            FILE* fp = fopen("data.txt", "a");
+            fprintf("%d|%d.%d.%d",code,date.day,date.month,date.year);
+            fclose(fp);
+            exit(0);
+        }
+        if(strcmp(argv[1], "sick")){
 
+        }
     }
 
     //Skapa ett binärt träd med utgångsdatumet som rot
@@ -199,6 +216,7 @@ void alarm()
     printf("VARNING\nKONTAKTA LÄKARE\n");
 }
 
+//Save and quit
 void quit(TreeNode** rootPtr){
     FILE* fp = fopen("data.txt","w");
     saveToFile((*rootPtr)->right, fp);
