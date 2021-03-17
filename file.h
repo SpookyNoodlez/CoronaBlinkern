@@ -10,4 +10,11 @@
  * */
 TreeNode* loadFile(TreeNode* root);
 
+/**
+ * Saves all entries from the node onward to the data.txt file
+ * @param treePtr The node to start saving from
+ * @param filePtr A file opened in write mode
+ * */
+void saveToFile(TreeNode* treePtr, FILE* filePtr);
+
 #endif

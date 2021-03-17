@@ -20,7 +20,19 @@ typedef struct TreeNode{
 TreeNode* createNode(struct Date date, int code);
 
 
-//ADD DESCRIPTION
+/**
+ * Puts a node in the right place in the tree
+ * @param root The root of the tree
+ * @param date The date to add to the tree
+ * @param code The code to add to the tree
+ * @returns The new root node
+ * */
 TreeNode* insertNode(TreeNode* root, Date date, int code);
+
+/**
+ * Deletes a branch of the tree starting with the given parameter
+ * @param p a pointer to the node where the deletion should start
+ * */
+void deleteBranch(TreeNode* p);
 
 #endif

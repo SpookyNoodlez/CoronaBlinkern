@@ -27,3 +27,14 @@ TreeNode* loadFile(TreeNode* root){
 
     return root;
 }
+
+void saveToFile(TreeNode* treePtr, FILE* filePtr){
+    
+    if(treePtr == NULL){
+        return;
+    }
+    saveToFile(treePtr->left, filePtr);
+    saveToFile(treePtr->right, filePtr);
+    
+    fprintf(filePtr,"%d|%d.%d.%d\n",treePtr->code,treePtr->date.day,treePtr->date.month,treePtr->date.year);
+}

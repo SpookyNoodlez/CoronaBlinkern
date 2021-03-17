@@ -32,6 +32,11 @@ TreeNode* insertNode(TreeNode* root, Date date, int code)
     return root;
 }
 
-TreeNode* deleteOld(TreeNode* root){
-    
+void deleteBranch(TreeNode* p){
+    if(p == NULL){
+        return;
+    }
+    deleteBranch(p->left);
+    deleteBranch(p->right);
+    free(p);
 }

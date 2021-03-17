@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
+#include <stdlib.h>
 
 #include "date.h"
 #include "tree.h"
@@ -9,13 +10,18 @@
 #define MAX 256
 
 //prototypes
-void menu();
-void open();
-void contact();
+void menu(TreeNode** rootPtr);
+void open(TreeNode** rootPtr);
+void contact(TreeNode** rootPtr);
 void alarm();
+void quit(TreeNode** rootPtr);
 
-int main()
+int main(int argc, char *argv[])
 {
+    if(argc != 0){//command line mode
+
+    }
+
     //Skapa ett binärt träd med utgångsdatumet som rot
     Date currentDate = getCurrentDate();
     Date expirationDate = goBack(currentDate);
@@ -24,14 +30,13 @@ int main()
     //Ladda all existerande data från filen till trädet
     root = loadFile(root);
 
-    menu(root);
+    menu(&root);//hmmmmm
 }
 
 //main menu
 void menu(TreeNode **rootPtr)
 {
-    bool loop = true;
-    while (loop)
+    while (true)
     {
         int menuChoice;
 
@@ -46,17 +51,16 @@ void menu(TreeNode **rootPtr)
         switch (menuChoice)
         {
         case 1:
-            open();
+            open(rootPtr);//hmmmmm
             break;
         case 2:
-            contact(&rootPtr);
+            contact(rootPtr);//hmmmmm
             break;
         case 3:
             alarm();
             break;
         case 4:
-            //saveToFile();
-            loop = false;
+            quit(rootPtr);//hmmmmm
             break;
         default:
             bad = true;
@@ -72,7 +76,7 @@ void menu(TreeNode **rootPtr)
 }
 
 //For when sick
-void open()
+void open(TreeNode** rootPtr)
 {
     int openCode;
     printf("Enter code:");
@@ -83,7 +87,7 @@ void open()
     }
     printf("Code %d received\n\n", openCode);
 
-    //JOBBAR HÄR
+    deleteBranch((*rootPtr)->left);
 }
 
 //For when passing anyone
@@ -193,4 +197,11 @@ void contact(TreeNode **rootPtr)
 void alarm()
 {
     printf("VARNING\nKONTAKTA LÄKARE\n");
+}
+
+void quit(TreeNode** rootPtr){
+    FILE* fp = fopen("data.txt","w");
+    saveToFile((*rootPtr)->right, fp);
+    fclose(fp);
+    exit(0);
 }
