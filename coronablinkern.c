@@ -35,7 +35,24 @@ int main(int argc, char *argv[])
             exit(0);
         }
         if(strcmp(argv[1], "sick")){
-
+            printf("code %d received\n", argv[2]);
+        }
+        if(strcmp(argv[1], "check")){
+            int code;
+            Date date;
+            fscanf("%d|%d.%d.%d",code,date.day,date.month,date.year);
+            if(code == argv[2]){
+                printf("Code is in file\n");
+            }
+            else{
+                printf("Code is not in file\n");
+            }
+        }
+        if(strcmp(argv[1], "help")){
+            printf("COMMANDS\n");
+            printf("add code|year.month.day - Adds an entry to the file\n");
+            printf("sick opencode - Nothing really\n");
+            printf("check code - Checks if the code is in the file\n");
         }
     }
 
