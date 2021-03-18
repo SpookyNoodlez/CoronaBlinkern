@@ -35,4 +35,7 @@ TreeNode* insertNode(TreeNode* root, Date date, int code);
  * */
 void deleteBranch(TreeNode* p);
 
+
+void printBranch(TreeNode *p);
+
 #endif

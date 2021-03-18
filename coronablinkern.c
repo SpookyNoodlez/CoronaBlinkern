@@ -2,7 +2,6 @@
 #include <stdbool.h>
 #include <string.h>
 #include <stdlib.h>
-#include <string.h>
 
 #include "date.h"
 #include "tree.h"
@@ -22,27 +21,27 @@ int main(int argc, char *argv[])
     printf("%s", argv[1]);
     if (argc > 1)
     { //command line mode
-        if (strcmp(argv[1], "add"))
+        if (strcmp(argv[1], "add") == 0)
         { //add entry
             int code = atoi(argv[2]);
             Date date;
             char *dateString = argv[3];
-            int control = sscanf(dateString, "%d|%d.%d.%d", &code, &date.day, &date.month, &date.year);
-            if (control != 4)
+            int control = sscanf(dateString, "%d.%d.%d", &date.day, &date.month, &date.year);
+       /*     if (control != 3)
             { //needs more datacheck
                 exit(1);
-            }
+            }*/
             FILE *fp = fopen("data.txt", "a");
             fprintf(fp, "%d|%d.%d.%d", code, date.day, date.month, date.year);
             fclose(fp);
             exit(0);
         }
-        else if (strcmp(argv[1], "sick"))
+        else if (strcmp(argv[1], "sick") == 0)
         {
             printf("code %s received\n", argv[2]);
             exit(0);
         }
-        else if (strcmp(argv[1], "check"))
+        else if (strcmp(argv[1], "check") == 0)
         {
             int code;
             Date date;
@@ -59,7 +58,7 @@ int main(int argc, char *argv[])
             fclose(fp);
             exit(0);
         }
-        else if (strcmp(argv[1], "help"))
+        else if (strcmp(argv[1], "help") == 0)
         {
             printf("COMMANDS\n");
             printf("add code|year.month.day - Adds an entry to the file\n");
@@ -96,6 +95,7 @@ void menu(TreeNode **rootPtr)
         printf("2. Receive bluetooth code\n");
         printf("3. Infection alarm\n");
         printf("4. Quit\n");
+        printf("5. Print tree (debug)\n");
         scanf("%d", &menuChoice);
 
         bool bad = false;
@@ -112,6 +112,9 @@ void menu(TreeNode **rootPtr)
             break;
         case 4:
             quit(rootPtr); //hmmmmm
+            break;
+        case 5:
+            printBranch(*rootPtr);
             break;
         default:
             bad = true;
@@ -139,6 +142,7 @@ void open(TreeNode **rootPtr)
     printf("Code %d received\n\n", openCode);
 
     deleteBranch((*rootPtr)->left);
+    printBranch((*rootPtr)->right);
 }
 
 //For when passing anyone

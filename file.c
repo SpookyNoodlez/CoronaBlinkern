@@ -40,5 +40,5 @@ void saveToFile(TreeNode *treePtr, FILE *filePtr)
     saveToFile(treePtr->left, filePtr);
     saveToFile(treePtr->right, filePtr);
 
-    fprintf(filePtr, "%d|%d.%d.%d\n", treePtr->code, treePtr->date.day, treePtr->date.month, treePtr->date.year);
+    fprintf(filePtr, "%d|%d.%d.%d", treePtr->code, treePtr->date.day, treePtr->date.month, treePtr->date.year);
 }

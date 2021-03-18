@@ -45,3 +45,14 @@ void deleteBranch(TreeNode *p)
     deleteBranch(p->right);
     free(p);
 }
+
+void printBranch(TreeNode *p)
+{
+    if (p == NULL)
+    {
+        return;
+    }
+    printBranch(p->left);
+    printBranch(p->right);
+    printf("%d|%d.%d.%d\n",p->code, p->date.day,p->date.month,p->date.year);
+}
