@@ -142,6 +142,7 @@ void open(TreeNode **rootPtr)
     printf("Code %d received\n\n", openCode);
 
     deleteBranch((*rootPtr)->left);
+    (*rootPtr)->left = NULL;
     printBranch((*rootPtr)->right);
 }
 
